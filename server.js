@@ -1,7 +1,12 @@
+/* server start point js*/
 const express = require('express');
 const app = express();
 const path = require('path');
+const routes = require('./routes');
 
-app.listen('8105',()=>{
-    console.log('start server');
+routes.routeInit(app);
+app.listen('3000',()=>{
+    console.log("start server");
 });
+
+
