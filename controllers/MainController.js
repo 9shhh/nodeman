@@ -1,5 +1,7 @@
 // Main Controller
 const path = require('path');
+
+// main page show
 exports.index = (req,res) => {
-    res.sendFile(path.resolve('views') + '/main/index.html');
-}
+    res.render(path.resolve('views') + '/main/index.ejs',{});
+};
