@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Hello Nodeman</title>
+    <script src="https://unpkg.com/vue"></script>
 </head>
 <body>
     메인 페이지 입니다.
@@ -13,7 +14,22 @@
         <input type="password" name="password" required/>
         <button>login</button>
     </form>
-    <a href="/signUp">회원가입</a><br>
-    
+    <a href="/signUp">회원가입</a><br><br>
+    <table>
+        <tr>
+            <th>유저 이름</th>
+            <th>생성일</th>
+        </tr>
+        <%
+        if(locals.datas){
+        for(let i=0; i<locals.datas.length; i++){%>
+        <tr>
+            <td><%=locals.datas[i].user_id%></td>
+            <td>
+                <%=new Date(locals.datas[i].created_at.toString()).getFullYear()%>
+            </td>
+        </tr>
+        <%}}%>
+    </table>
 </body>
 </html>
