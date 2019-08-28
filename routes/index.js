@@ -19,6 +19,18 @@ module.exports.routeInit = (app,connection) =>{
        .post(signInController.store)
 
     // board
+    const boardController = require('../controllers/BoardController');
+    boardController.init(connection);
+    app.route('/board')
+       .get(boardController.index)
+       .post(boardController.store)
+
+       app.route('/board/:id/edit')
+       .get(boardController.edit)
+       
+       app.route('/board/:id')
+       .get(boardController.destory)
+       .post(boardController.update)
 }
 
 

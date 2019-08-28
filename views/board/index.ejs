@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>board</title>
+</head>
+<style>
+        .contents{
+            width: 500px; 
+            height: 100px; 
+            resize: none;
+        }
+        .contents::placeholder{color:red;}
+        .title{width: 500px;}
+        .title::placeholder{color:red;}
+</style>
+<body>
+    <form action="/board" method="post">
+        <input class='title' name='title' placeholder="제목" required><br><br>
+        <textarea class='contents' name='contents' placeholder="글 작성해라" required></textarea><br>
+        <button>작성하기</button>
+    </form><br><br>
+    <table>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>내용</th>
+            <th>작성자</th>
+            <th>작성일</th>
+            <th>수정/삭제</th>
+        </tr>
+        <%if(locals.datas.length > 0){%>
+            <%for(let i=0; i<datas.length; i++){%>    
+                <tr>
+                    <td><%=datas[i].id%></td>
+                    <td><%=datas[i].title%></td>
+                    <td><%=datas[i].contents%></td>
+                    <td><%=datas[i].user_no%></td>
+                    <td><%=datas[i].created_at.toISOString().substring(0, 10);%></td>
+                    <td>
+                        <button onclick="edit(<%=datas[i].id%>)">수정</button>
+                        <form action="/board/<%=datas[i].id%>" method="GET">
+                            <button>삭제</button>
+                        </form>
+                    </td>
+                </tr>
+            <%}%>
+        <%}else{%>
+            <td colspan="5">데이터가 없습니다.</td> 
+        <%}%>
+    </table>
+</body> 
+<script>
+    function edit(id){
+        location.href = '/board/'+id+'/edit';
+    }    
+</script>
+</html>

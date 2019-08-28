@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+        .contents{
+            width: 500px; 
+            height: 100px; 
+            resize: none;
+        }
+        .contents::placeholder{color:red;}
+        .title{width: 500px;}
+        .title::placeholder{color:red;}
+</style>
+<body>
+        <form action="/board/<%=data[0].id%>" method="post">
+            <input class='title' name='title' required value="<%=data[0].title%>"><br><br>
+            <textarea class='contents' name='contents' required><%=data[0].contents%></textarea><br>
+            <button>수정하기</button>
+        </form>
+</body>
+</html>
