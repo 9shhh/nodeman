@@ -8,18 +8,19 @@ exports.init = (db) => {
 
 // board page show
 exports.index = (req,res) => {
-    let query = 'select * from board';
+    let query = 'select board.id, board.user_no, user.user_id, board.title, board.contents, board.created_at FROM board join user on board.user_no = user.id';
     this.dbconnection.query(query,function(err,rows){
         if (err) throw err;
-        
-        res.render(path.resolve('views') + '/board/index.ejs',{datas : rows});
+
+        res.locals.user = req.session.loginId;
+        res.render(path.resolve('views') + '/board/index.ejs',{datas : rows}); 
     });
 };
 
 // create contents
 exports.store = (req,res) => {
     let query = 'insert into board (user_no,title,contents) values(?,?,?)';
-    let params = [2,req.body.title,req.body.contents]
+    let params = [req.session.loginId,req.body.title,req.body.contents]
     this.dbconnection.query(query,params,function(err){
         if (err) throw err;
         

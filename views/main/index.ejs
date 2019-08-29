@@ -8,29 +8,17 @@
     <script src="https://unpkg.com/vue"></script>
 </head>
 <body>
-    메인 페이지 입니다.
-    <form action="/signIn" method="POST">
-        <input type="text" name="id" required/>
-        <input type="password" name="password" required/>
-        <button>login</button>
-    </form>
-    <a href="/signUp">회원가입</a>
-    <a href="/board">게시판</a>
-    <br><br>
-    <table>
-        <%if(locals.datas){
-        for(let i=0; i<locals.datas.length; i++){%>
-                <tr>
-                    <th>유저 이름</th>
-                    <th>생성연도</th>
-                </tr>
-        <tr>
-            <td><%=locals.datas[i].user_id%></td>
-            <td>
-                <%=new Date(locals.datas[i].created_at.toString()).getFullYear()%>
-            </td>
-        </tr>
-        <%}}%>
-    </table>
+    메인 페이지 입니다.<br>
+    <%if(locals.user){%>
+        <a href="/signOut">로그아웃</a>
+        <a href="/board">게시판</a>
+    <%}else{%>
+        <form action="/signIn" method="POST">
+            <input type="text" name="id" required/>
+            <input type="password" name="password" required/>
+            <button>login</button>
+        </form>
+        <a href="/signUp">회원가입</a>
+    <%}%>    
 </body>
 </html>

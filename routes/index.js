@@ -12,11 +12,16 @@ module.exports.routeInit = (app,connection) =>{
        .get(signUpController.index)
        .post(signUpController.store)
 
-    // sign In
+    // sign in
     const signInController = require('../controllers/SignInController');
     signInController.init(connection);
     app.route('/signIn')
        .post(signInController.store)
+
+   // sign out
+   const signOutController = require('../controllers/SignOutController');
+   app.route('/signOut')
+      .get(signOutController.destory)   
 
     // board
     const boardController = require('../controllers/BoardController');

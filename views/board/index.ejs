@@ -17,6 +17,7 @@
         .title::placeholder{color:red;}
 </style>
 <body>
+    <a href="/">메인으로</a><br><br>
     <form action="/board" method="post">
         <input class='title' name='title' placeholder="제목" required><br><br>
         <textarea class='contents' name='contents' placeholder="글 작성해라" required></textarea><br>
@@ -37,13 +38,13 @@
                     <td><%=datas[i].id%></td>
                     <td><%=datas[i].title%></td>
                     <td><%=datas[i].contents%></td>
-                    <td><%=datas[i].user_no%></td>
+                    <td><%=datas[i].user_id%></td>
                     <td><%=datas[i].created_at.toISOString().substring(0, 10);%></td>
                     <td>
+                        <%if(locals.user === datas[i].user_no){%>
                         <button onclick="edit(<%=datas[i].id%>)">수정</button>
-                        <form action="/board/<%=datas[i].id%>" method="GET">
-                            <button>삭제</button>
-                        </form>
+                        <button onclick="del(<%=datas[i].id%>)">삭제</button>
+                        <%}%>
                     </td>
                 </tr>
             <%}%>
@@ -55,6 +56,10 @@
 <script>
     function edit(id){
         location.href = '/board/'+id+'/edit';
+    }  
+
+    function del(id){
+        location.href = '/board/'+id;
     }    
 </script>
 </html>
