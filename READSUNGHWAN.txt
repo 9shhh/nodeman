@@ -1,3 +1,6 @@
 추가 된 패키지   - jsonwebtoken;
                 - nodemon;
                 
+                
+                로그인 가입 수정
+                db 생성요령 추가
