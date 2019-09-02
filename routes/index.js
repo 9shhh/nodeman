@@ -1,5 +1,5 @@
 /* defined route lists */ 
-module.exports.routeInit = (app,connection) =>{
+module.exports.routeInit = (app) =>{
     // main 
     const mainController = require('../controllers/MainController');
     app.route('/')
@@ -7,14 +7,14 @@ module.exports.routeInit = (app,connection) =>{
 
     // sign up
     const signUpController = require('../controllers/SignUpController');
-    signUpController.init(connection);
+   //  signUpController.init(connection);
     app.route('/signUp')
        .get(signUpController.index)
        .post(signUpController.store)
 
     // sign in
     const signInController = require('../controllers/SignInController');
-    signInController.init(connection);
+   //  signInController.init(connection);
     app.route('/signIn')
        .post(signInController.store)
 
@@ -25,7 +25,7 @@ module.exports.routeInit = (app,connection) =>{
 
     // board
     const boardController = require('../controllers/BoardController');
-    boardController.init(connection);
+   //  boardController.init(connection);
     app.route('/board')
        .get(boardController.index)
        .post(boardController.store)
