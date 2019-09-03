@@ -1,29 +1,35 @@
 //SignInController
 const path = require('path');
-
-// connect db
-exports.init = (db) => {
-    this.dbconnection = db;
-}
+const {User,Board} = require('../models');
 
 // board page show
 exports.index = (req,res) => {
-    let query = 'select board.id, board.user_no, user.user_id, board.title, board.contents, board.created_at FROM board join user on board.user_no = user.id';
-    this.dbconnection.query(query,function(err,rows){
-        if (err) throw err;
+    // let query = 'select board.id, board.user_no, user.user_id, board.title, board.contents, board.created_at FROM board join user on board.user_no = user.id';
+    // this.dbconnection.query(query,function(err,rows){
+    //     if (err) throw err;
 
+    //     res.locals.user = req.session.loginId;
+    //     res.render(path.resolve('views') + '/board/index.ejs',{datas : rows}); 
+    // });
+    Board
+    .findAll()
+    .then((result)=>{
+        console.log(result)
         res.locals.user = req.session.loginId;
-        res.render(path.resolve('views') + '/board/index.ejs',{datas : rows}); 
+        res.render(path.resolve('views') + '/board/index.ejs',{datas : result}); 
     });
+    
 };
 
 // create contents
 exports.store = (req,res) => {
-    let query = 'insert into board (user_no,title,contents) values(?,?,?)';
-    let params = [req.session.loginId,req.body.title,req.body.contents]
-    this.dbconnection.query(query,params,function(err){
-        if (err) throw err;
-        
+    Board
+    .create({
+        userNo : req.session.loginId
+        ,title : req.body.title
+        ,contents : req.body.contents
+    })
+    .then(()=>{
         res.redirect('/board');
     });
 };

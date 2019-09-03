@@ -7,14 +7,12 @@ module.exports.routeInit = (app) =>{
 
     // sign up
     const signUpController = require('../controllers/SignUpController');
-   //  signUpController.init(connection);
     app.route('/signUp')
        .get(signUpController.index)
        .post(signUpController.store)
 
     // sign in
     const signInController = require('../controllers/SignInController');
-   //  signInController.init(connection);
     app.route('/signIn')
        .post(signInController.store)
 
@@ -25,7 +23,6 @@ module.exports.routeInit = (app) =>{
 
     // board
     const boardController = require('../controllers/BoardController');
-   //  boardController.init(connection);
     app.route('/board')
        .get(boardController.index)
        .post(boardController.store)

@@ -32,16 +32,16 @@
             <th>작성일</th>
             <th>수정/삭제</th>
         </tr>
-        <%if(locals.datas.length > 0){%>
+        <%if(datas.length > 0){%>
             <%for(let i=0; i<datas.length; i++){%>    
                 <tr>
                     <td><%=datas[i].id%></td>
                     <td><%=datas[i].title%></td>
                     <td><%=datas[i].contents%></td>
-                    <td><%=datas[i].user_id%></td>
-                    <td><%=datas[i].created_at.toISOString().substring(0, 10);%></td>
+                    <td></td>
+                    <td><%=datas[i].createdAt.toISOString().substring(0, 10);%></td>
                     <td>
-                        <%if(locals.user === datas[i].user_no){%>
+                        <%if(locals.user === datas[i].userNo){%>
                         <button onclick="edit(<%=datas[i].id%>)">수정</button>
                         <button onclick="del(<%=datas[i].id%>)">삭제</button>
                         <%}%>

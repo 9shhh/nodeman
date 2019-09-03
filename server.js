@@ -2,14 +2,10 @@
 const express = require('express');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
-const sequelize = require('./config').sequelize;
+const sequelize = require('./models').sequelize;
 const app = express();
-const routes = require('./routes');
-// const mysql = require('mysql');
-// const dbconfig = require('./config/database.js');
-// const connection = mysql.createConnection(dbconfig);
-
 sequelize.sync();
+const routes = require('./routes');
 
 /*APP USE-------------------*/ 
 app.use(express.urlencoded({
@@ -24,11 +20,10 @@ app.use(session({
 }));
 /*--------------------------*/ 
 
-// connection.connect();
-
 routes.routeInit(app);
 app.listen('3000',()=>{
     console.log("start server");
 });
 
 
+ 
