@@ -38,7 +38,7 @@
                     <td><%=datas[i].id%></td>
                     <td><%=datas[i].title%></td>
                     <td><%=datas[i].contents%></td>
-                    <td></td>
+                    <td><%=datas[i].User.userId%></td>
                     <td><%=datas[i].createdAt.toISOString().substring(0, 10);%></td>
                     <td>
                         <%if(locals.user === datas[i].userNo){%>

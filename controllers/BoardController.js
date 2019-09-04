@@ -4,17 +4,11 @@ const {User,Board} = require('../models');
 
 // board page show
 exports.index = (req,res) => {
-    // let query = 'select board.id, board.user_no, user.user_id, board.title, board.contents, board.created_at FROM board join user on board.user_no = user.id';
-    // this.dbconnection.query(query,function(err,rows){
-    //     if (err) throw err;
-
-    //     res.locals.user = req.session.loginId;
-    //     res.render(path.resolve('views') + '/board/index.ejs',{datas : rows}); 
-    // });
     Board
-    .findAll()
+    .findAll({
+        include : User
+    })
     .then((result)=>{
-        console.log(result)
         res.locals.user = req.session.loginId;
         res.render(path.resolve('views') + '/board/index.ejs',{datas : result}); 
     });
@@ -36,31 +30,39 @@ exports.store = (req,res) => {
 
 // delete contents
 exports.destory = (req,res) => {
-    let query = 'delete from board where id=?';
-    this.dbconnection.query(query,req.params.id,function(err){
-        if (err) throw err;
-        
+    Board
+    .destroy({
+        where : {
+            id : req.params.id
+        }
+    })
+    .then(()=>{
         res.redirect('/board');
     });
 };
 
 // edit contents form
 exports.edit = (req,res) => {
-    let query = 'select * from board where id=?';
-    this.dbconnection.query(query,req.params.id,function(err,rows){
-        if (err) throw err;
-    
-        res.render(path.resolve('views') + '/board/edit.ejs',{data : rows});
+    Board
+    .findOne({
+        where : {
+            id : req.params.id
+        }
+    })
+    .then((result)=>{
+        console.log(result);
+        res.render(path.resolve('views') + '/board/edit.ejs',{data : result});
     });
 };
 
 // update contents
 exports.update = (req,res) => {
-    let query = 'update board set title=?, contents=? where id=?';
-    let params = [req.body.title,req.body.contents,req.params.id];
-    this.dbconnection.query(query,params,function(err){
-        if (err) throw err;
-        
+    Board
+    .update(
+         {title : req.body.title,contents : req.body.contents}
+        ,{where : {id : req.params.id}}
+        )
+    .then(()=>{
         res.redirect('/board');
     });
 };

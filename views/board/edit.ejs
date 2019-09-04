@@ -17,9 +17,9 @@
         .title::placeholder{color:red;}
 </style>
 <body>
-        <form action="/board/<%=data[0].id%>" method="post">
-            <input class='title' name='title' required value="<%=data[0].title%>"><br><br>
-            <textarea class='contents' name='contents' required><%=data[0].contents%></textarea><br>
+        <form action="/board/<%=data.id%>" method="post">
+            <input class='title' name='title' required value="<%=data.title%>"><br><br>
+            <textarea class='contents' name='contents' required><%=data.contents%></textarea><br>
             <button>수정하기</button>
         </form>
 </body>
