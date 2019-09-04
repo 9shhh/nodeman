@@ -12,7 +12,6 @@ exports.index = (req,res) => {
         res.locals.user = req.session.loginId;
         res.render(path.resolve('views') + '/board/index.ejs',{datas : result}); 
     });
-    
 };
 
 // create contents
